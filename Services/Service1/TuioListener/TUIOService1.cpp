@@ -127,7 +127,7 @@ void TuioDump::addTuioCursor(TuioCursor *tcur) {
 void TuioDump::updateTuioCursor(TuioCursor *tcur) {
 	tcur_x[tcur->getCursorID()]=tcur->getX();
 	tcur_y[tcur->getCursorID()]=tcur->getY();
-	tcur_status[tcur->getCursorID()]=MULTI_CONFIDENCE_BIT | MULTI_IN_RANGE_BIT | MULTI_TIPSWITCH_BIT;
+	tcur_status[tcur->getCursorID()]=MULTI_CONFIDENCE_BIT;
 	
 	//SendHidRequests_updatetouch(vmulti,reportId,false);
 }
@@ -136,7 +136,7 @@ void TuioDump::removeTuioCursor(TuioCursor *tcur) {
 	idsToRemove.push_back(tcur->getCursorID());
 	tcur_x[tcur->getCursorID()]=tcur->getX();
 	tcur_y[tcur->getCursorID()]=tcur->getY();
-	tcur_status[tcur->getCursorID()]=MULTI_CONFIDENCE_BIT | MULTI_IN_RANGE_BIT | MULTI_TIPSWITCH_BIT;
+	tcur_status[tcur->getCursorID()]=MULTI_CONFIDENCE_BIT;
 	tcur_status[tcur->getCursorID()]=0;
 	//SendHidRequests_updatetouch(vmulti,reportId,true);
 }
@@ -146,7 +146,6 @@ void  TuioDump::refresh(TuioTime frameTime) {
 	for(list<int>::iterator i = idsToRemove.begin(); i != idsToRemove.end(); i++)
 	{
 		int idToRemove = *i;
-	tcur_status(idToRemove)=MULTI_CONFIDENCE_BIT | MULTI_IN_RANGE_BIT | MULTI_TIPSWITCH_BIT;
 		tcur_x.erase(idToRemove);
 		tcur_y.erase(idToRemove);
 		tcur_status.erase(idToRemove);
