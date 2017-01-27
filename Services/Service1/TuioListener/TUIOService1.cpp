@@ -146,7 +146,7 @@ void  TuioDump::refresh(TuioTime frameTime) {
 	for(list<int>::iterator i = idsToRemove.begin(); i != idsToRemove.end(); i++)
 	{
 		int idToRemove = *i;
-	tcur_status[tcur->getCursorID()]=MULTI_CONFIDENCE_BIT | MULTI_IN_RANGE_BIT | MULTI_TIPSWITCH_BIT;
+	tcur_status(idToRemove)=MULTI_CONFIDENCE_BIT | MULTI_IN_RANGE_BIT | MULTI_TIPSWITCH_BIT;
 		tcur_x.erase(idToRemove);
 		tcur_y.erase(idToRemove);
 		tcur_status.erase(idToRemove);
