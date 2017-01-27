@@ -135,7 +135,7 @@ void TuioDump::removeTuioCursor(TuioCursor *tcur) {
 	tcur_x[tcur->getCursorID()]=tcur->getX();
 	tcur_y[tcur->getCursorID()]=tcur->getY();
 	tcur_status[tcur->getCursorID()]=0;
-	tcur_status[tcur->getCursorID()]=MULTI_CONFIDENCE_BIT;
+	tcur_status[tcur->getCursorID()]=MULTI_CONFIDENCE_BIT | MULTI_IN_RANGE_BIT | MULTI_TIPSWITCH_BIT;
 	//SendHidRequests_updatetouch(vmulti,reportId,true);
 }
 
