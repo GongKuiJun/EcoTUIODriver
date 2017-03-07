@@ -1,4 +1,5 @@
 
+*.db
 /Configuration_Utility/Configuration_Utility/obj
 /Configuration_Utility/_ReSharper.Configuration_Utility
 /Services/Service1/_ReSharper.Tuio-To-VmultiClient

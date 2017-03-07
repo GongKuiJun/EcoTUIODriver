@@ -1,3 +1,11 @@
+Notes:
+======
+
+- Stripped version to one service
+- Upgraded VS solution to VS2015 
+- compatible with Win10
+
+
 EcoTUIODriver
 =============
 
@@ -8,7 +16,7 @@ Original Authors: Rajat Goyal(gyl.rajat@gmail.com) and Bill Hamilton(luin.uial@g
 Liscense: [LGPL](https://github.com/ecologylab/EcoTUIODriver/blob/master/LISCENSE.txt)
 
 ##INSTALL 
-1. Download the [source](https://github.com/ecologylab/EcoTUIODriver/archive/master.zip).
+1. Download the [source](https://github.com/almighty-bungholio/EcoTUIODriver/archive/master.zip).
 
 2. Run the installer (EcoTUIODriver.exe in top level directory).
 
@@ -16,11 +24,8 @@ Liscense: [LGPL](https://github.com/ecologylab/EcoTUIODriver/blob/master/LISCENS
 
 If you used the installer, the configuration utility will automatically be added in your startmenu and desktop. Otherwise you can manually locate it at $INSALL_DIR/executables/Configuration/Configuration_Utility.exe
 
-![ "Screenshot" ](http://imageshack.us/a/img827/8/ecotuioconf.png)
-				
 Start the service to convert TUIO events to windows touch events. 
 
-EcoTUIODriver supports up to 5 TUIO sensors simultaneously on distinct UDP ports.
 Sensors may be mapped to displays by hitting the "ASSIGN DISPLAYS TO SENSORS" button, which runs a native windows mapping utility.
 
 EcoTUIODriver in action:
