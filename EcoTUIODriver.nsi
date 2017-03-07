@@ -116,7 +116,7 @@ Section "Driver and Configuration Utility"
 
   SetShellVarContext all  
   
-  MessageBox MB_OK "Your computer might freeze several times during the installation , don't do anything | The Installer installs 5 virtual TUIO touch devices . It's important that you provide permission each time."
+  MessageBox MB_OK "Your computer might freeze several times during the installation , don't do anything | The Installer installs virtual TUIO touch device . It's important that you provide permission each time."
 
   SetOutPath $INSTDIR
         File /r "Drivers"
@@ -165,19 +165,11 @@ Section "Driver and Configuration Utility"
   Is32bit:
     SetOutPath "$INSTDIR\Drivers\x86-Driver-Installers"
     Execwait "$INSTDIR\Drivers\x86-Driver-Installers\Installvmulti1.cmd"
-    Execwait "$INSTDIR\Drivers\x86-Driver-Installers\Installvmulti2.cmd"
-    Execwait "$INSTDIR\Drivers\x86-Driver-Installers\Installvmulti3.cmd"
-    Execwait "$INSTDIR\Drivers\x86-Driver-Installers\Installvmulti4.cmd"
-    Execwait "$INSTDIR\Drivers\x86-Driver-Installers\Installvmulti5.cmd"
     SetOutPath $INSTDIR
     GOTO End32Bitvs64BitCheck
   Is64Bit:
     SetOutPath "$INSTDIR\Drivers\x64-Driver-Installers"
     Execwait "$INSTDIR\Drivers\x64-Driver-Installers\Installvmulti1.cmd"
-    Execwait "$INSTDIR\Drivers\x64-Driver-Installers\Installvmulti2.cmd"
-    Execwait "$INSTDIR\Drivers\x64-Driver-Installers\Installvmulti3.cmd"
-    Execwait "$INSTDIR\Drivers\x64-Driver-Installers\Installvmulti4.cmd"
-    Execwait "$INSTDIR\Drivers\x64-Driver-Installers\Installvmulti5.cmd"
     SetOutPath $INSTDIR
     
   End32Bitvs64BitCheck:
@@ -203,10 +195,6 @@ Section "uninstall"
  Delete "$DESKTOP\EcoTUIODriver.lnk"
  
  Execwait "$INSTDIR\Executables\Tuio-to-Vmulti-Service-1.exe remove 3"
- Execwait "$INSTDIR\Executables\Tuio-to-Vmulti-Service-2.exe remove 3"
- Execwait "$INSTDIR\Executables\Tuio-to-Vmulti-Service-3.exe remove 3"
- Execwait "$INSTDIR\Executables\Tuio-to-Vmulti-Service-4.exe remove 3"
- Execwait "$INSTDIR\Executables\Tuio-to-Vmulti-Service-5.exe remove 3"
  
  ;remove drivers
  IfFileExists $WINDIR\SYSWOW64\*.* Is64bit2 Is32bit2
@@ -226,4 +214,3 @@ Section "uninstall"
  SetRebootFlag true
  
 SectionEnd
-

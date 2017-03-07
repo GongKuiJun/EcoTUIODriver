@@ -48,6 +48,8 @@ class TuioDump : public TuioListener {
 		void updateTuioCursor(TuioCursor *tcur);
 		void removeTuioCursor(TuioCursor *tcur);
 
+		void tcurSetXY(TuioCursor * tcur);
+
 		void refresh(TuioTime frameTime);
 };
 

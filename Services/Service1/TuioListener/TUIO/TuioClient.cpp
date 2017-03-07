@@ -23,6 +23,13 @@
 
 using namespace TUIO;
 using namespace osc;
+using std::string;
+
+#include <fstream>
+#include <sstream>
+
+/* DEBUGGING */
+/**/
 
 #ifndef WIN32
 static void* ClientThreadFunc( void* obj )
@@ -117,6 +124,8 @@ void TuioClient::ProcessMessage( const ReceivedMessage& msg, const IpEndpointNam
 		ReceivedMessageArgumentStream args = msg.ArgumentStream();
 		ReceivedMessage::const_iterator arg = msg.ArgumentsBegin();
 		
+		std::stringstream tuioMessage;
+
 		if( strcmp( msg.AddressPattern(), "/tuio/2Dobj" ) == 0 ){
 			
 			const char* cmd;
@@ -187,13 +196,21 @@ void TuioClient::ProcessMessage( const ReceivedMessage& msg, const IpEndpointNam
 
 						TuioObject *frameObject = NULL;
 						switch (tobj->getTuioState()) {
-							case TUIO_REMOVED:
+							case TUIO_REMOVED:							
 								frameObject = tobj;
 								frameObject->remove(currentTime);
 
-								for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
-									(*listener)->removeTuioObject(frameObject);
-
+								for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++){
+									currentTime.getSystemTime();
+									/* debugging */
+									tuioMessage << currentTime.getSeconds() << " removed " 
+												<< frameObject->getSymbolID() << " " 
+												<< frameObject->getX() << " " 
+												<< frameObject->getY() << std::endl;
+									logToFile(&tuioMessage.str());
+									/**/
+									(*listener)->removeTuioObject(frameObject);									
+								}
 								lockObjectList();								
 								for (std::list<TuioObject*>::iterator delobj=objectList.begin(); delobj!=objectList.end(); delobj++) {
 									if((*delobj)->getSessionID()==frameObject->getSessionID()) {
@@ -204,12 +221,17 @@ void TuioClient::ProcessMessage( const ReceivedMessage& msg, const IpEndpointNam
 								unlockObjectList();
 								break;
 							case TUIO_ADDED:
-								
 								lockObjectList();
 								frameObject = new TuioObject(currentTime,tobj->getSessionID(),tobj->getSymbolID(),tobj->getX(),tobj->getY(),tobj->getAngle());
 								objectList.push_back(frameObject);
 								unlockObjectList();
-								
+								/* debugging */
+								tuioMessage << currentTime.getSeconds() << " added " 
+											<< frameObject->getSymbolID() << " " 
+											<< frameObject->getX() << " " 
+											<< frameObject->getY() << std::endl;
+								logToFile(&tuioMessage.str());
+								/**/
 								for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
 									(*listener)->addTuioObject(frameObject);
 								
@@ -231,7 +253,15 @@ void TuioClient::ProcessMessage( const ReceivedMessage& msg, const IpEndpointNam
 								else
 									frameObject->update(currentTime,tobj->getX(),tobj->getY(),tobj->getAngle(),tobj->getXSpeed(),tobj->getYSpeed(),tobj->getRotationSpeed(),tobj->getMotionAccel(),tobj->getRotationAccel());
 								unlockObjectList();
-								
+
+								/* debugging */
+								tuioMessage << currentTime.getSeconds() << " update " 
+											<< frameObject->getSymbolID() << " " 
+											<< frameObject->getX() << " " 
+											<< frameObject->getY() << std::endl;
+								logToFile(&tuioMessage.str());
+								/**/
+
 								for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
 									(*listener)->updateTuioObject(frameObject);
 								
@@ -328,7 +358,7 @@ void TuioClient::ProcessMessage( const ReceivedMessage& msg, const IpEndpointNam
 	
 								for (std::list<TuioListener*>::iterator listener=listenerList.begin(); listener != listenerList.end(); listener++)
 									(*listener)->removeTuioCursor(frameCursor);
-
+																	
 								lockCursorList();
 								for (std::list<TuioCursor*>::iterator delcur=cursorList.begin(); delcur!=cursorList.end(); delcur++) {
 									if((*delcur)->getSessionID()==frameCursor->getSessionID()) {
@@ -411,7 +441,7 @@ void TuioClient::ProcessMessage( const ReceivedMessage& msg, const IpEndpointNam
 									frameCursor->update(currentTime,tcur->getX(),tcur->getY());
 								else
 									frameCursor->update(currentTime,tcur->getX(),tcur->getY(),tcur->getXSpeed(),tcur->getYSpeed(),tcur->getMotionAccel());
-						
+
 								delete tcur;
 								unlockCursorList();
 								
@@ -564,4 +594,17 @@ std::list<TuioCursor*> TuioClient::getTuioCursors() {
 	std::list<TuioCursor*> listBuffer = cursorList;
 	unlockCursorList();
 	return listBuffer;
+}
+
+
+int TuioClient::logToFile(std::string* message) {
+	std::ofstream logFile;
+	logFile.open("logTouch.txt", std::ofstream::out | std::ofstream::app);
+	if (!logFile.bad())
+	{
+		logFile << message << std::endl;
+		logFile.close();
+		return 0;
+	}
+	return -1;
 }

@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
             wprintf(L"Service failed to run w/err 0x%08lx\n", GetLastError());
         }
 		}
-return 0;
+	return 0;
 }
 
    

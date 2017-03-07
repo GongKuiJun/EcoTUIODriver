@@ -1,0 +1,5 @@
+﻿  client.c
+  vmultiaclient.vcxproj -> D:\workspaces\EcoTUIODriver\Drivers\Vmulti1\Release\vmultiaclient.lib
+c:\winddk\7600.16385.1\inc\api\specstrings_supp.h(18): warning C28209: Die Deklaration für Symbol "SAL_range" verfügt über eine widersprüchliche Deklaration bei <built in>.
+c:\winddk\7600.16385.1\inc\api\hidsdi.h(32): warning C28251: Inkonsistente Anmerkung für "NTSTATUS": diese Instanz verfügt über keine Anmerkungen. Siehe c:\winddk\7600.16385.1\inc\api\bcrypt.h(24). 
+d:\workspaces\ecotuiodriver\drivers\vmulti1\client\client.c(541): warning C6001: Nicht initialisierter Speicher "deviceInterfaceDetailData" wird verwendet.

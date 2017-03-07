@@ -43,6 +43,9 @@
 #include "TuioListener.h"
 #include "TuioObject.h"
 #include "TuioCursor.h"
+
+#include <string.h>
+
 namespace TUIO {
 	
 	/**
@@ -126,6 +129,9 @@ namespace TUIO {
 		 * @return  a List of all currently active TuioCursors
 		 */
 		std::list<TuioCursor*> getTuioCursors();
+
+		int logToFile(std::string * message);
+
 
 		/**
 		 * Returns the TuioObject corresponding to the provided Session ID

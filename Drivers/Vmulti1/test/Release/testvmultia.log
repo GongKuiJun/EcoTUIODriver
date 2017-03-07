@@ -1,0 +1,9 @@
+﻿  testvmultia.c
+  Code wird generiert.
+  All 21 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Codegenerierung ist abgeschlossen.
+  testvmultia.vcxproj -> D:\workspaces\EcoTUIODriver\Drivers\Vmulti1\Release\testvmultia.exe
+  testvmultia.vcxproj -> D:\workspaces\EcoTUIODriver\Drivers\Vmulti1\Release\testvmultia.pdb (Full PDB)
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(130): warning C28252: Inkonsistente Anmerkung für "strcpy": _Param_(1) verfügt über "SAL_writableTo(elementCount(_String_length_(__formal(1,parameter1))+1))" für die vorherige Instanz. Siehe <no file>(0). 
+c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(130): warning C28253: Inkonsistente Anmerkung für "strcpy": _Param_(1) verfügt über "SAL_writableTo(elementCount(_String_length_(_Source)+1))" für diese Instanz. Siehe <no file>(0). 
+d:\workspaces\ecotuiodriver\drivers\vmulti1\test\testvmultia.c(127): warning C6011: Dereferenzierender NULL-Zeiger "pTouch". 
